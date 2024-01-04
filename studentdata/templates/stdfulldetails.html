@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+<h1 class="text-center mt-3">Student : {{stddetails.sname}} Details</h1>
+
+<div class="container my-5">
+    <table class="table">
+        <tr>
+            <th>Student Name :</th>
+            <td>{{stddetails.sname}}</td>
+        </tr>
+        <tr>
+            <th>Student Roll No :</th>
+            <td>{{stddetails.sroll}}</td>
+        </tr>
+        <tr>
+            <th>Student Gender :</th>
+            <td>{{stddetails.sgender}}</td>
+        </tr>
+        <tr>
+            <th>Student Standard :</th>
+            <td>{{stddetails.sstandard}}</td>
+        </tr>
+        <tr>
+            <th>Sunject List :</th>
+            <td>{{stddetails.ssubject}}</td>
+        </tr>
+        <tr>
+            <th>Student City :</th>
+            <td>{{stddetails.scity}}</td>
+        </tr>
+        <tr>
+            <th>Student School Name :</th>
+            <td>{{schoolnames}}</td>
+        </tr>
+    </table>
+    <a class="btn btn-secondary btn-lg btn-block my-4" href="/viewstdlist/{{schoolid.id}}/{{stddetails.sstandard}}">Back</a>
+</div>
+{% endblock body %}
+
+
+
+
+

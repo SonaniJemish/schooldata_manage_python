@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+
+
+{% block body %}
+  <h1 class="text-center mt-3">School List</h1>
+
+    <div class="container my-5">
+      <table class="table">
+        <tr>
+          <th>School ID</th>
+          <th>School Name</th>
+          <th>View</th>
+          <th>View Standard List</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+        {% for x in sclist %}
+        <tr>
+          <td>{{x.id}}</td>
+          <td>{{x.scname}}</td>
+          <td><a href="scfulldetails/{{x.id}}" class="text-primary">View</a></td>
+          <td><a href="standardlist/{{x.id}}" class="text-primary">View Standrad List</a></td>
+          <td><a href="updatesc/{{x.id}}" class="text-secondary">Update</a></td>
+          <td><a href="delschool/{{x.id}}" class="text-danger">Delete</a></td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+{% endblock body %}

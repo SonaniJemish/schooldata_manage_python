@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
+    <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+            class="navbar-toggler"
+            data-target="#navbarSupportedContent" data-toggle="collapse" type="button">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav m-auto">
+            <li class="nav-item form-check mt-2 mr-5">
+                <input class="form-check-input" id="checkPresent" type="checkbox"><label class="form-check-label"
+                                                                                         for="checkPresent">Present</label>
+            </li>
+            <li class="nav-item form-check mt-2 mr-5">
+                <input class="form-check-input" id="checkAbsent" type="checkbox"><label class="form-check-label"
+                                                                                        for="checkAbsent">Absent</label>
+            </li>
+            <li class="nav-item form-check mr-5">Enter Roll No :
+                <input class="border border-dark mt-1" id="filterroll" onkeyup="myFunction()" placeholder="Search for roll no.."
+                       type="textbox">
+            </li>
+            <li class="nav-item form-check mt-1 mr-5">Start Date :
+                <input class="border border-dark" id="startdate" type="date">
+            </li>
+            <li class="nav-item form-check mt-1 mr-5">End Date :
+                <input class=" border border-dark" id="enddate" type="date">
+            </li>
+        </ul>
+    </div>
+</nav>
+<h1 class="text-center mt-4">View Attendance List</h1>
+
+<div class="container my-5">
+    <table class="table" id="attendanceTable">
+        <thead>
+        <tr>
+            <th>Student Roll No</th>
+            <th>Date</th>
+            <th>Attendance</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for x in studentattendance %}
+            {% for y in x.astdpresent %}
+                <tr>
+                    <td>{{ x.stdproll }}</td>
+                    <td>{{ y.stddate }}</td>
+                    <td>{{ y.stdspresent }}</td>
+                </tr>
+            {% endfor %}
+        {% endfor %}
+        </tbody>
+    </table>
+    <a class="btn btn-secondary btn-lg btn-block my-4" href="/standardlist/{{schooldet.id}}">Back</a>
+
+</div>
+
+{% load static %}
+<script src="{% static 'JS/filter.js' %}"></script>
+
+
+{% endblock body %}

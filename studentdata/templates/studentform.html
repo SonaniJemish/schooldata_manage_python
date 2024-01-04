@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+<div class="container my-5">
+    <h2 class="text-center">Enter Student Details</h2>
+</div>
+<div class="container">
+    <form action="\studentform" class="mx-5" method="post">
+        {% csrf_token %}
+        <table class="table">
+            <tr>
+                <td><label for="sname">Student Name :</label></td>
+                <td><input class="form-control" id="sname" name="sname" placeholder="Enter Your Name" required
+                           type="name"></td>
+            </tr>
+            <tr>
+                <td><label for="sroll">Student Roll No :</label></td>
+                <td><input class="form-control" id="sroll" name="sroll" placeholder="Enter Your Roll Number" required
+                           type="number"></td>
+            </tr>
+            <tr>
+                <td><label for="sgender">Student Gender :</label></td>
+                <td><input class="form-control" id="sgender" name="sgender" placeholder="Enter Your Gender" required
+                           type="text"></td>
+            </tr>
+            <tr>
+                <td><label for="sstandard">Student Standard :</label></td>
+                <td><input class="form-control" id="sstandard" name="sstandard" placeholder="Enter Your Standard"
+                           required type="number" max="12" min="1"></td>
+            </tr>
+            <tr>
+                <td><label for="ssubject">Subjects :</label></td>
+                <td><input class="form-control" id="ssubject" name="ssubject" placeholder="Enter Your Subjects" required
+                           type="text"></td>
+            </tr>
+            <tr>
+                <td><label for="scity">Student City :</label></td>
+                <td><input class="form-control" id="scity" name="scity" placeholder="Enter Your City" required type="name"></td>
+            </tr>
+            <tr>
+                <td><label for="sjoindate">Student Join Date :</label></td>
+                <td><input class="form-control" id="sjoindate" name="sjoindate  " placeholder="Enter Your joining date" required type="date"></td>
+            </tr>
+            <tr>
+                <td><label for="scid">Choose a School :</label></td>
+                <td><select class="form-control" id="scid" name="scid">
+                    <option value="">Select School ....</option>
+                    {% for x in schlist %}
+                    <option value="{{x.id}}">{{x.scname}}</option>
+                    {% endfor %}
+                </select></td>
+            </tr>
+        </table>
+        <button class="btn btn-primary btn-lg btn-block my-4" name="ssubmit" type="submit">Submit</button>
+    </form>
+</div>
+{% endblock body %}

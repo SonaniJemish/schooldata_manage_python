@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+<h1 class="text-center  mt-3">{{schdetailers.scname}} Details</h1>
+
+<div class="container my-5">
+    <!--      <h4 class="my-4">Student Details</h4>-->
+    <table class="table">
+        <tr>
+            <th>School Name :</th>
+            <td>{{schdetailers.scname}}</td>
+        </tr>
+        <tr>
+            <th>School Trusty Name :</th>
+            <td>{{schdetailers.sctrusty}}</td>
+        </tr>
+        <tr>
+            <th>School Principal Name :</th>
+            <td>{{schdetailers.scprincipal}}</td>
+        </tr>
+        <tr>
+            <th>Student Capacity :</th>
+            <td>{{schdetailers.studentcapacity}}</td>
+        </tr>
+        <tr>
+            <th>School Address :</th>
+            <td>{{schdetailers.schooladd}}</td>
+        </tr>
+    </table>
+</div>
+{% endblock body %}

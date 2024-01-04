@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+<div class="container my-5">
+    <h2 class="text-center">Enter School Details</h2>
+</div>
+<div class="container">
+    <form action="\schoolform" class="mx-5" method="post">
+        {% csrf_token %}
+        <table class="table">
+            <tr>
+                <td><label for="scname">School Name :</label></td>
+                <td><input class="form-control" id="scname" name="scname" placeholder="Enter School Name..." required
+                           type="name"></td>
+            </tr>
+            <tr>
+                <td><label for="sctrusty">School Trusty Name :</label></td>
+                <td><input class="form-control" id="sctrusty" name="sctrusty" placeholder="Enter School Trusty Name..."
+                           required type="name"></td>
+            </tr>
+            <tr>
+                <td><label for="scprincipal">School Principal Name :</label></td>
+                <td><input class="form-control" id="scprincipal" name="scprincipal"
+                           placeholder="Enter School Principal Name..." required type="name"></td>
+            </tr>
+            <tr>
+                <td><label for="studentcapacity">Student Capacity :</label></td>
+                <td><input class="form-control" id="studentcapacity" name="studentcapacity"
+                           placeholder="Enter Student Capacity..." required type="number"></td>
+            </tr>
+            <tr>
+                <td><label for="schooladd">School Address :</label></td>
+                <td><input class="form-control" id="schooladd" name="schooladd" placeholder="Enter School Address"
+                           required type="text"></td>
+            </tr>
+        </table>
+        <button class="btn btn-primary btn-lg btn-block my-4" name="ssubmit" type="submit">Submit</button>
+    </form>
+</div>
+{% endblock body %}
+
+
+

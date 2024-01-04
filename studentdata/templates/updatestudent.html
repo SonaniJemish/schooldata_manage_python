@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+<div class="container my-5">
+    <h2 class="text-center">Update Student Details</h2>
+</div>
+<div class="container">
+    <form action="/updatestd/{{updatestd.id}}" class="mx-5" method="post">
+        {% csrf_token %}
+        <table class="table">
+            <tr>
+                <td><label for="sname">Student Name :</label></td>
+                <td><input class="form-control" id="sname" name="sname" placeholder="Enter Updated Name " required type="name" value="{{updatestd.sname}}"></td>
+            </tr><tr>
+                <td><label for="sroll">Student Roll No :</label></td>
+                <td><input class="form-control" id="sroll" name="sroll" placeholder="Enter Updated Roll Number " required type="number" value="{{updatestd.sroll}}"></td>
+            </tr>
+            <tr>
+                <td><label for="sgender">Student Gender :</label></td>
+                <td><input class="form-control" id="sgender" name="sgender" placeholder="Enter Gender" required type="text" value="{{updatestd.sgender}}"></td>
+            </tr>
+            <tr>
+                <td><label for="sstandard">Student Standard :</label></td>
+                <td><input class="form-control" id="sstandard" name="sstandard" placeholder="Enter Updated Standad " required type="number" value="{{updatestd.sstandard}}"></td>
+            </tr>
+            <tr>
+                <td><label for="ssubject">Subjects :</label></td>
+                <td><input class="form-control" id="ssubject" name="ssubject" placeholder="Add or Change Subject " required type="text" value="{{updatestd.ssubject}}"></td>
+            </tr>
+            <tr>
+                <td><label for="scity">Student City :</label></td>
+                <td><input class="form-control" id="scity" name="scity" placeholder="Enter Updated City " required type="name" value="{{updatestd.scity}}"></td>
+            </tr>
+            <tr>
+                <td><label for="school">Choose a School :</label></td>
+                <td><select class="form-control" id="school" name="scid">
+                    <option value="">Select School ....</option>
+                    {% for x in schlist %}
+                    <option value="{{x.id}}">{{x.scname}}</option>
+                    {% endfor %}
+                </select></td>
+            </tr>
+        </table>
+        <button class="btn btn-info btn-lg btn-block my-4" name="ssubmit" type="submit">Update</button>
+        <a class="btn btn-secondary btn-lg btn-block my-4" href="/viewstdlist/{{schoolid.id}}/{{updatestd.sstandard}}">Back</a>
+    </form>
+</div>
+{% endblock body %}
+
+
+

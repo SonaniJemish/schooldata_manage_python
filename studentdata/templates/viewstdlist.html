@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+<h1 class="text-center mt-3"><u>{{schooldet.scname}}</u>&nbsp&nbsp&nbsp  Standard-{{standard}}  &nbsp&nbsp&nbspStudent List</h1>
+
+<div class="container my-5">
+    <table class="table">
+        <tr>
+            <th>Student Roll No</th>
+            <th>Student Name</th>
+            <th>View</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        {% for x in stddetails %}
+            <tr>
+                <td>{{x.sroll}}</td>
+                <td>{{x.sname}}</td>
+                <td><a class="text-primary" href="/stdschdetail/{{x.id}}">View</a></td>
+                <td><a class="text-secondary" href="/updatestd/{{x.id}}">Update</a></td>
+                <td><a class="text-danger" href="/delstudent/{{x.id}}">Delete</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+    <a class="btn btn-secondary btn-lg btn-block my-4" href="/standardlist/{{schooldet.id}}">Back</a>
+</div>
+{% endblock body %}
+
+

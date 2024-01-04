@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<h1 class="text-center mt-3">{{schooldet.scname}} Standard List</h1>
+
+<div class="container my-5">
+    <table class="table">
+        <tr>
+            <th>Student Standard</th>
+            <th>Total Student</th>
+            <th>View Student List</th>
+            <th>Student Attendance</th>
+            <th>View Student Attendance</th>
+        </tr>
+        {% for keys,values in stdcount.items %}
+        <tr>
+            <td>{{keys}}</td>
+            <td>{{values}}</td>
+            <td><a class="text-primary" href="/viewstdlist/{{schooldet.id}}/{{keys}}">View Student List</a></td>
+            <td><a class="text-primary" href="/attendancelist/{{schooldet.id}}/{{keys}}">Student Attendance</a></td>
+            <td><a class="text-primary" href="/viewattendancelist/{{schooldet.id}}/{{keys}}">View Student Attendance</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+            <a class="btn btn-secondary btn-lg btn-block my-4" href="/viewschoollist">Back</a>
+</div>
+{% endblock body %}

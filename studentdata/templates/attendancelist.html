@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<h1 class="text-center mt-3">{{schooldet.scname}}</u>&nbsp&nbsp&nbsp  Standard-{{standard}}  &nbsp&nbsp&nbspStudent Attendance</h1>
+<div class="container my-5">
+    <form action="/attendancelist/{{schooldet.id}}/{{standard}}" method="post">
+        {% csrf_token %}
+        <input class="form-control border-0 my-3" id="stddate" name="stddate" type="date" REQUIRED>
+        <table class="table">
+            <tr>
+                <th>Student Roll No</th>
+                <th>Student Name</th>
+                <th>Attendance</th>
+            </tr>
+            {% for x in stddetails %}
+                <input class="border-0 bg-white" type="number" name="stdstandard" id="stdstandard" value="{{standard}}" hidden>
+                <tr>
+                    <td><input class="border-0 bg-white" type="number" name="stdroll" id="stdroll" value="{{x.sroll}}" readonly></td>
+                    <td><input class="border-0 bg-white" type="text" name="stdname" id="stdname" value="{{x.sname}}" readonly></td>
+                    <td><input class="mr-1" type="radio" name="stdspresent[{{x.sroll}}]" id="stdpresentp" value="Present" >&nbsp&nbsp<label class="mr-3" for="stdpresentp">Present</label>
+                        <input class="mr-1" type="radio" name="stdspresent[{{x.sroll}}]" id="stdpresenta" value="Absent" >&nbsp&nbsp<label for="stdpresentp">Absent</label></td>
+                </tr>
+            {% endfor %}
+        </table>
+        <button class="btn btn-primary btn-lg btn-block my-4" type="submit">Submit Attendance</button>
+        <a class="btn btn-info btn-lg btn-block my-4" href="/viewattendancelist/{{schooldet.id}}/{{standard}}">View Attendance List</a>
+        <a class="btn btn-secondary btn-lg btn-block my-4" href="/standardlist/{{schooldet.id}}">Back</a>
+    </form>
+</div>
+{% endblock body %}

@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <h1 class="text-center">{{ schooldet.scname }}&nbsp&nbsp&nbsp Standard-{{ standard }} &nbsp&nbsp&nbspStudent Attendance</h1>
+    <div class="container my-5">
+        <form action="{% url 'attendancelist' scid=schooldet.id id=some_id %}" method="post">
+            {% csrf_token %}
+            <input class="form-control border-0 my-3" id="stddate" name="stddate" type="date" REQUIRED>
+            <table class="table">
+                <tr>
+                    <th>Student Roll No</th>
+                    <th>Student Name</th>
+                    <th>Attendance</th>
+                </tr>
+                {% for student in stddetails %}
+                    <tr>
+                        <td>
+                            <input class="border-0 bg-white" type="number" name="stdroll" id="stdroll"
+                                   value="{{ student.sroll }}" readonly>
+                        </td>
+                        <td>
+                            <input class="border-0 bg-white" type="text" name="stdname" id="stdname"
+                                   value="{{ student.sname }}" disabled>
+                        </td>
+                        <td>
+                            <input class="mr-1" type="radio" name="stdspresent[{{ student.sroll }}]"
+                                   id="stdpresentp" value="Present" required>
+                            &nbsp&nbsp<label class="mr-3" for="present">Present</label>
+                            <input class="mr-1" type="radio" name="stdspresent[{{ student.sroll }}]"
+                                   id="stdpresenta" value="Absent" required>
+                            &nbsp&nbsp<label for="Absent">Absent</label>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+            <button class="btn btn-primary btn-lg btn-block my-4"
+                    data-href-template="{% url 'attendancelist' scid=schooldet.id id=some_id %}" type="submit">
+                Submit Attendance
+            </button>
+        </form>
+    </div>
+{% endblock body %}
+
+
+
+
+
+
+
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from .models import schooldetails, Student, StdPresent
+
+def attendance(request, scid, some_id):
+    if request.method == "POST":
+        stddate = request.POST.get('stddate')
+        stdrolls = request.POST.getlist('stdroll')
+
+        for stdroll in stdrolls:
+            stdspresent = request.POST.get(f'stdspresent[{stdroll}]', '')
+            stdattendance = StdPresent(stddate=stddate, stdroll=stdroll, stdspresent=stdspresent)
+            stdattendance.save()
+
+        messages.success(request, "Attendance data has been saved.")
+
+    # Fetch other data needed for rendering the template
+    schooldet = schooldetails.objects.get(pk=scid)
+    stddetails = Student.objects.filter(scid=scid)
+
+    context = {
+        'schooldet': schooldet,
+        'some_id': some_id,
+        'stddetails': stddetails,
+    }
+
+    return render(request, 'attendancelist.html', context)
+
